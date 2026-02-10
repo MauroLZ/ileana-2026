@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi Valentín? 💚</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #3a5a40 0%, #588157 50%, #a3b18a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating hearts animation */
+        .heart {
+            position: fixed;
+            color: #90ee90;
+            font-size: 20px;
+            animation: float 4s ease-in infinite;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 30px 20px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .shrek-image {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .shrek-image:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            color: #3a5a40;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin-bottom: 30px;
+            line-height: 1.4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight {
+            color: #588157;
+            font-weight: bold;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        button {
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        #yes-btn {
+            background: linear-gradient(135deg, #90ee90, #78c778);
+            color: #2d5016;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        #yes-btn:hover {
+            background: linear-gradient(135deg, #78c778, #90ee90);
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(144, 238, 144, 0.5);
+        }
+
+        #no-btn {
+            background: linear-gradient(135deg, #d4a373, #bc8f5e);
+            color: #4a3728;
+        }
+
+        #no-btn:hover {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-5deg); }
+            75% { transform: translateX(10px) rotate(5deg); }
+        }
+
+        /* Sad Shrek floating animation */
+        .sad-shrek {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: auto;
+            border-radius: 15px;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateX(-50%) translateY(20px);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        .sad-shrek.animate {
+            animation: floatUp 1.5s ease-out;
+        }
+
+        /* Vomit emoji center animation */
+        .vomit-emoji {
+            position: fixed;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: auto;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes quickFade {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+        }
+
+        .vomit-emoji.animate {
+            animation: quickFade 0.8s ease-out;
+        }
+
+        .success-message {
+            display: none;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .success-message h2 {
+            color: #3a5a40;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin-bottom: 15px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .success-message p {
+            color: #588157;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+
+        .ogre-quote {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(144, 238, 144, 0.2);
+            border-radius: 15px;
+            font-style: italic;
+            color: #3a5a40;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 15px;
+            }
+
+            button {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+
+            .sad-shrek {
+                width: 100px;
+            }
+
+            .vomit-emoji {
+                width: 100px;
+            }
+        }
+
+        /* Add sparkle effect */
+        .sparkle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 1s ease-out forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5) rotate(180deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div id="hearts-container"></div>
+
+    <!-- Vomit emoji for "No" clicks -->
+    <img src="assets/vomit.png" 
+         alt="Vomit emoji" 
+         class="vomit-emoji"
+         id="vomit-emoji">
+
+    <div class="container">
+        <div id="question-section">
+            <img src="assets/shrek-bathroom.gif" 
+                 alt="Shrek saliendo del baño" 
+                 class="shrek-image"
+                 id="main-shrek">
+            
+            <h1>
+                <span class="highlight">Ileana hermosa</span>, 
+                ¿quieres ser mi valentín por <span class="highlight">tercer año consecutivo</span>? 💚
+            </h1>
+
+            <div class="buttons-container">
+                <img src="assets/image.png" 
+                     alt="Sad Shrek" 
+                     class="sad-shrek"
+                     id="sad-shrek">
+                <button id="yes-btn">Claro que si te amo</button>
+                <button id="no-btn">Asco</button>
+            </div>
+
+            <div class="ogre-quote">
+                "Yo vi esta flor y pensé en ti porque es bonita, y bueno en realidad a mi no me gusta, pero creí que te gustaría porque tú si eres bonita 🌷"
+            </div>
+        </div>
+
+        <div id="success-section" class="success-message">
+            <img src="assets/shrek-fiona-kissing.gif" 
+                 alt="Shrek y Fiona besándose" 
+                 class="shrek-image">
+            
+            <h2>Vivieron feos para siempre.</h2>
+
+            <div class="ogre-quote">
+                "Fiona, eres el amor de mi vida. Y si tengo que ser un caballero para demostrarlo, lo seré."
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const sadShrek = document.getElementById('sad-shrek');
+        const vomitEmoji = document.getElementById('vomit-emoji');
+        const questionSection = document.getElementById('question-section');
+        const successSection = document.getElementById('success-section');
+        let noClickCount = 0;
+
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💚';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            document.getElementById('hearts-container').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeart, 800);
+
+        // Create sparkles on click
+        function createSparkles(e) {
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.background = `hsl(${Math.random() * 60 + 90}, 80%, 70%)`;
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        }
+
+        // Handle "No" button
+        noBtn.addEventListener('click', (e) => {
+            noClickCount++;
+            
+            // Show sad Shrek floating animation
+            sadShrek.classList.remove('animate');
+            void sadShrek.offsetWidth; // Trigger reflow
+            sadShrek.classList.add('animate');
+
+            // Show vomit emoji in center with quick fade
+            vomitEmoji.classList.remove('animate');
+            void vomitEmoji.offsetWidth; // Trigger reflow
+            vomitEmoji.classList.add('animate');
+
+            // Make Yes button bigger after each No click
+            const currentScale = 1 + (noClickCount * 0.1);
+            yesBtn.style.transform = `scale(${currentScale})`;
+        });
+
+        // Handle "Yes" button
+        yesBtn.addEventListener('click', (e) => {
+            createSparkles(e);
+            
+            // Hide question, show success
+            questionSection.style.display = 'none';
+            successSection.style.display = 'block';
+
+            // Create celebration hearts burst
+            for (let i = 0; i < 30; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+
+            // Optional: Confetti-like effect
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.top = Math.random() * 100 + 'vh';
+                    sparkle.style.background = `hsl(${Math.random() * 360}, 80%, 70%)`;
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1000);
+                }, i * 50);
+            }
+        });
+
+        // Add hover effect for Yes button
+        yesBtn.addEventListener('mouseenter', (e) => {
+            createSparkles(e);
+        });
+
+        // Initial hearts
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createHeart, i * 300);
+        }
+    </script>
+</body>
+</html>
